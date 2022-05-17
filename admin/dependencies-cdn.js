@@ -1,0 +1,22 @@
+module.exports = [
+  { name: 'vue', library: 'Vue', js: 'https://cdn.staticfile.org/vue/2.6.10/vue.min.js', css: '' },
+  { name: 'vue-i18n', library: 'VueI18n', js: 'https://cdn.staticfile.org/vue-i18n/8.15.1/vue-i18n.min.js', css: '' },
+  { name: 'vue-router', library: 'VueRouter', js: 'https://cdn.staticfile.org/vue-router/3.1.3/vue-router.min.js', css: '' },
+  { name: 'vuex', library: 'Vuex', js: 'https://cdn.staticfile.org/vuex/3.1.2/vuex.min.js', css: '' },
+  { name: 'axios', library: 'axios', js: 'https://cdn.staticfile.org/axios/0.19.0/axios.min.js', css: '' },
+  { name: 'better-scroll', library: 'BScroll', js: 'https://unpkg.com/better-scroll@1.15.2/dist/bscroll.min.js', css: '' },
+  { name: 'axios-mock-adapter', library: 'AxiosMockAdapter', js: 'https://unpkg.com/axios-mock-adapter@1.18.1/dist/axios-mock-adapter.min.js', css: '' },
+  { name: 'element-ui', library: 'ELEMENT', js: 'https://cdn.staticfile.org/element-ui/2.13.1/index.js', css: 'https://cdn.staticfile.org/element-ui/2.13.1/theme-chalk/index.css' },
+  { name: 'lodash', library: '_', js: 'https://cdn.staticfile.org/lodash.js/4.17.15/lodash.min.js', css: '' },
+  { name: 'ua-parser-js', library: 'UAParser', js: 'https://cdn.staticfile.org/UAParser.js/0.7.20/ua-parser.min.js', css: '' },
+  { name: 'js-cookie', library: 'Cookies', js: 'https://cdn.staticfile.org/js-cookie/2.2.1/js.cookie.min.js', css: '' },
+  { name: 'nprogress', library: 'NProgress', js: 'https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js', css: 'https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css' },
+  { name: 'dayjs', library: 'dayjs', js: 'https://cdn.staticfile.org/dayjs/1.8.17/dayjs.min.js', css: '' },
+  { name: 'fuse.js', library: 'Fuse', js: 'https://cdn.staticfile.org/fuse.js/5.2.3/fuse.min.js', css: '' },
+  { name: 'hotkeys-js', library: 'hotkeys', js: 'https://unpkg.com/hotkeys-js@3.7.3/dist/hotkeys.min.js', css: '' },
+  { name: 'qs', library: 'Qs', js: 'https://cdn.staticfile.org/qs/6.9.1/qs.min.js', css: '' },
+  { name: 'lowdb', library: 'low', js: 'https://cdn.staticfile.org/lowdb/1.0.0/low.min.js', css: '' },
+  { name: 'lowdb/adapters/LocalStorage', library: 'LocalStorage', js: 'https://cdn.staticfile.org/lowdb/1.0.0/LocalStorage.min.js', css: '' },
+  { name: 'screenfull', library: 'screenfull', js: 'https://cdn.staticfile.org/screenfull.js/5.0.2/screenfull.min.js', css: '' },
+  { name: 'sortablejs', library: 'Sortable', js: 'https://cdn.staticfile.org/Sortable/1.10.1/Sortable.min.js', css: '' }
+]
