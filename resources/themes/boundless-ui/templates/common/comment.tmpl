@@ -1,0 +1,56 @@
+{{ define "boundless-ui/comment" }}
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/zhaoyangkun/aries/resources/themes/xue/static/css/aries-comment.css">
+    <style>
+        .vditor-ir pre.vditor-reset {
+            background-color: var(--panel-background-color) !important;
+        }
+
+        .ant-pagination {
+            text-align: center;
+        }
+    </style>
+    <div id="aries-comment" style="margin-top: 30px">
+        <Comment :article_id="article_id" :page_id="page_id" :comment_type="comment_type"></Comment>
+    </div>
+    <script type="text/javascript">
+        function loadScripts(urls, path) {
+            return new Promise(function (resolve) {
+                urls.forEach(function (src, i) {
+                    let script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.src = (path || "") + src;
+                    script.async = false;
+
+                    // If last script, bind the callback event to resolve
+                    if (i === urls.length - 1) {
+                        // Multiple binding for browser compatibility
+                        script.onreadystatechange = resolve;
+                        script.onload = resolve;
+                    }
+
+                    // Fire the loading
+                    document.body.appendChild(script);
+                });
+            });
+        }
+
+        function renderComment() {
+            new Vue({
+                el: "#aries-comment",
+                data() {
+                    return {
+                        article_id: {{ .articleID }},
+                        page_id: {{ .pageID }},
+                        comment_type: {{ .commentType }},
+                    }
+                }
+            });
+        }
+
+        loadScripts([
+            "https://cdn.staticfile.org/vue/2.6.12/vue.min.js",
+            "https://cdn.jsdelivr.net/gh/zhaoyangkun/aries/resources/themes/xue/static/js/aries-comment.js",
+        ]).then(renderComment);
+    </script>
+{{ end }}

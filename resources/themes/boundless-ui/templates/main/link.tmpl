@@ -1,0 +1,35 @@
+{{ define "boundless-ui/link.tmpl" }}
+    <!DOCTYPE html>
+    <html lang="zh-cmn-Hans">
+    <head>
+        {{ template "boundless-ui/head" . }}
+        <link rel="stylesheet"
+              href="{{ .blogVars.StaticRootPath }}/resources/themes/{{ .blogVars.Theme }}/static/css/link.css">
+    </head>
+    <body>
+    {{ template "boundless-ui/nav" . }}
+
+    <!--主体-->
+    <div class="big-container">
+        <article class="article">
+            <!--友情链接-->
+            <ul class="link-box">
+                {{ range $link := .links }}
+                    <li>
+                        <a href="{{ $link.Url }}" target="_blank">{{ $link.Name }}</a>
+                        <span class="description">{{ $link.Desc }}</span>
+                    </li>
+                {{ end }}
+            </ul>
+        </article>
+    </div>
+
+    {{ template "boundless-ui/footer" . }}
+
+    {{ template "boundless-ui/script" . }}
+
+    <script type="text/javascript">
+    </script>
+    </body>
+    </html>
+{{ end }}

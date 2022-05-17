@@ -1,0 +1,101 @@
+{{ define "boundless-ui/article.tmpl" }}
+    <!DOCTYPE html>
+    <html lang="zh-cmn-Hans">
+    <head>
+        {{ template "boundless-ui/head" . }}
+        <link rel="stylesheet"
+              href="{{ .blogVars.StaticRootPath }}/resources/themes/{{ .blogVars.Theme }}/static/css/article-detail.css">
+        <link rel="stylesheet"
+              href="{{ .blogVars.StaticRootPath }}/resources/themes/{{ .blogVars.Theme }}/static/css/github.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.15.1/katex.min.css"
+              crossorigin="anonymous">
+    </head>
+    <body>
+    {{ template "boundless-ui/nav" . }}
+
+    <!--文章目录-->
+    {{/*<div class="toc" style="display: block;">*/}}
+    {{/*    <ul>*/}}
+    {{/*        <li>*/}}
+    {{/*            <a href="#_1" id="toc-a-on">二. 栈和队列</a>*/}}
+    {{/*            <ul>*/}}
+    {{/*                <li><a href="#1">1. 栈</a>*/}}
+    {{/*                    <ul>*/}}
+    {{/*                        <li><a href="#1_1">(1) 概念</a></li>*/}}
+    {{/*                        <li><a href="#2">(2) 数据结构</a></li>*/}}
+    {{/*                    </ul>*/}}
+    {{/*                </li>*/}}
+    {{/*                <li><a href="#2_1">2. 队列</a>*/}}
+    {{/*                    <ul>*/}}
+    {{/*                        <li><a href="#1_2">(1) 概念</a></li>*/}}
+    {{/*                        <li><a href="#2_2">(2) 数据结构</a></li>*/}}
+    {{/*                    </ul>*/}}
+    {{/*                </li>*/}}
+    {{/*            </ul>*/}}
+    {{/*        </li>*/}}
+    {{/*    </ul>*/}}
+    {{/*</div>*/}}
+
+    <!--主体-->
+    <section class="main">
+        <label for="article_id"></label><input id="article_id" name="article_id" value="55" hidden="">
+        <label for="user_id"></label><input id="user_id" name="user_id"
+                                            value=""
+                                            hidden="">
+        <div class="left-box">
+            <div id="outerdiv">
+                <div id="innerdiv" style="position:absolute;">
+                    <img alt="" id="bigimg" style="box-shadow: 0 0 10px rgba(0,0,0,0.38)" src="">
+                </div>
+            </div>
+            <!--文章内容-->
+            <div class="article-container">
+                <div class="article-content markdown-body">
+                    <h1 style="margin: 10px 0">{{ .article.Title }}</h1>
+                    {{ safe .article.MDContent }}
+                </div>
+                <div class="prev-next fl">
+                    {{ if .preArticle.Title }}
+                        <div class="p-div">
+                            <span class="fl">上一篇：</span>
+                            <a class="one-line-overflow fl"
+                               href="{{ .blogVars.ContextPath }}/articles/{{ .preArticle.URL }}"
+                               id="prev-a">{{ .preArticle.Title }}</a>
+                        </div>
+                    {{ end }}
+                    {{ if .nextArticle.Title }}
+                        <div class="p-div">
+                            <span class="fl">下一篇：</span>
+                            <a class="one-line-overflow fl"
+                               href="{{ .blogVars.ContextPath }}/articles/{{ .nextArticle.URL }}"
+                               id="prev-a">{{ .nextArticle.Title }}</a>
+                        </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+
+        {{ if .article.IsAllowCommented }}
+            {{ if eq .commentPlugInSetting.plug_in "local-comment" }}
+                {{ template "boundless-ui/comment" . }}
+            {{ else if eq .commentPlugInSetting.plug_in "twikoo-comment" }}
+                {{ template "boundless-ui/tcomment" . }}
+            {{ end }}
+        {{ end }}
+    </section>
+
+    {{ template "boundless-ui/footer" . }}
+
+    {{ template "boundless-ui/script" . }}
+
+    <script src="https://cdn.staticfile.org/KaTeX/0.15.1/katex.min.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        const math_list = document.getElementsByClassName("vditor-math");
+        for (let math of math_list) {
+            katex.render(math.innerText, math);
+        }
+    </script>
+    </body>
+    </html>
+{{ end }}

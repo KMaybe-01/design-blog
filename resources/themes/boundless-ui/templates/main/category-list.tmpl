@@ -1,0 +1,117 @@
+{{ define "boundless-ui/category-list.tmpl" }}
+    <!DOCTYPE html>
+    <html lang="zh-cmn-Hans">
+    <head>
+        {{ template "boundless-ui/head" . }}
+        <link rel="stylesheet"
+              href="{{ .blogVars.StaticRootPath }}/resources/themes/{{ .blogVars.Theme }}/static/css/myPagination.css">
+        <link rel="stylesheet"
+              href="{{ .blogVars.StaticRootPath }}/resources/themes/{{ .blogVars.Theme }}/static/css/index.css">
+    </head>
+    <body>
+    {{ template "boundless-ui/nav" . }}
+
+    <!--主体-->
+    <div class="big-container">
+        <article class="article">
+            <!--右容器-->
+            <div class="right-holder">
+                <div class="column-container">
+                    <ul class="column_box" id="like-box">
+                        <li class="column-title">
+                        <span class="at-sort b-b-ece fl">
+                            <a class="at-sort-comment-a c-666 fl">分类</a>
+                        </span>
+                        </li>
+                        {{ range $category := .categories }}
+                            <li class="column-category">
+                                <a href="{{ $.blogVars.ContextPath }}/categories/{{ $category.Url }}">
+                                    {{ $category.Name }}&nbsp;&nbsp;{{ $category.Count }}&nbsp;篇
+                                </a>
+                            </li>
+                        {{ end }}
+                    </ul>
+                </div>
+
+            </div>
+
+            <!--左容器-->
+            <div class="result-box fl">
+                <!--文章内容-->
+                <div id="article-holder" style="width: 100%; float: left">
+                    {{ range $article := .articles  }}
+                        <div class="article-box">
+                            <div class="ab-content">
+                                <a href="{{ $.blogVars.ContextPath }}/articles/{{ $article.URL }}"
+                                   class="article-img-box">
+                                    <img class="lazy-image article-img"
+                                         data-src="{{ $article.Img }}" alt="" src="">
+                                </a>
+                                <div class="article-title">
+                                    <a href="{{ $.blogVars.ContextPath }}/articles/{{ $article.URL }}">{{ $article.Title }}</a>
+                                </div>
+                                <div class="article-cate">
+                                    {{ range $tag := $article.TagList }}
+                                        <a href="{{ $.blogVars.ContextPath }}/tags/{{ $tag.Name }}">{{ $tag.Name }}</a>
+                                    {{ end }}
+                                </div>
+                                <div class="article-detail-box c-666">{{ $article.Summary }}</div>
+                                <span class="article-tail-box">
+                                    <i class="fl"
+                                       style="background-image: url('{{ $.blogVars.StaticRootPath }}/resources/themes/{{ $.blogVars.Theme }}/static/img/read-index.svg')"></i>
+                                    <span class="read-number c-999 fl">{{ $article.VisitCount }}</span>
+                                    <i class="fl"
+                                       style="background-image: url('{{ $.blogVars.StaticRootPath }}/resources/themes/{{ $.blogVars.Theme }}/static/img/comment-index.svg')"></i>
+                                    <span class="comment-number c-999 fl">{{ $article.CommentCount }}</span>
+                                    <span class="article-date c-999">{{ $article.CreatedAt.Format "2006-01-02" }}</span>
+                                    <span class="article-author one-line-overflow c-999">{{ $article.User.Username }}</span>
+                                </span>
+                            </div>
+                        </div>
+                    {{ end }}
+                </div>
+
+                <!--分页指示器-->
+                <div id="pagination" class="pagination fl">
+                    <ul>
+                        <li class="disabled">首页</li>
+                        <li class="disabled">&lt;</li>
+                        <li class="active">1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>&gt;</li>
+                        <li>尾页</li>
+                    </ul>
+                </div>
+            </div>
+
+        </article>
+    </div>
+
+    {{ template "boundless-ui/footer" . }}
+
+    {{ template "boundless-ui/script" . }}
+
+    <script type="text/javascript">
+        // 分页
+        const pagination = new myPagination({
+            id: 'pagination',
+            curPage: {{ .currentPage }}, // 初始页码
+            pageTotal: {{ .totalPages }}, // 总页数
+            pageAmount: {{ .pageSize }}, // 每页多少条
+            dataTotal: {{ .totalCount }}, // 总共多少条数据
+            pageSize: 3, // 可选,分页个数
+            //showPageTotalFlag: true, // 是否显示数据统计
+            //showSkipInputFlag: true, // 是否支持跳转
+            getPage: function (page) {
+                {{ if .categoryUrl }}
+                location.href = "{{ .blogVars.ContextPath }}/categories/{{ .categoryUrl }}/p/" + page;
+                {{ else }}
+                location.href = "{{ .blogVars.ContextPath }}/category/p/" + page;
+                {{ end }}
+            }
+        });
+    </script>
+    </body>
+    </html>
+{{ end }}
